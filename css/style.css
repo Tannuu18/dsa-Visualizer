@@ -1,0 +1,431 @@
+/* --- Basic Setup & Variables --- */
+:root {
+    --bg-color: #F7F7FF;
+    --panel-bg: #FFFFFF;
+    --primary-color: #6D28D9;
+    --primary-hover: #5B21B6;
+    --secondary-color: #E5E7EB;
+    --text-color: #1F2937;
+    --text-light: #6B7280;
+    --border-color: #E5E7EB;
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header & Navigation --- */
+header {
+    background-color: var(--panel-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 2rem;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+/* --- Buttons --- */
+.btn {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+.btn-secondary:hover {
+    background-color: #D1D5DB;
+}
+
+/* --- Main App Layout --- */
+/* --- Main App Layout --- */
+#app-container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    grid-template-rows: 1fr; /* ADD THIS LINE */
+    gap: 1.5rem;
+    padding: 1.5rem;
+    
+}
+
+.panel {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.panel-title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+}
+
+/* --- Form Controls --- */
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: #F9FAFB;
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+/* --- Visualization Area --- */
+#visualization-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Bars grow from the bottom */
+    align-items: center;
+    gap: 2px;
+    padding-bottom: 2rem; /* Space for labels */
+    position: relative;
+    height: 100%;
+}
+
+.bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    gap: 2px;
+}
+
+.bar {
+    flex-grow: 1; /* This tells the bar to take up available space */
+    background-color: var(--primary-color);
+    text-align: center;
+    position: relative;
+    transition: height 0.3s ease, background-color 0.3s ease;
+    /* We removed 'width: 10px;' */
+}
+
+.bar-label {
+    position: absolute;
+    bottom: -1.5rem;
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem; /* Slightly smaller */
+    color: var(--text-light);
+    white-space: nowrap; /* Prevents number from wrapping */
+    overflow: hidden; /* Hides any part of number that doesn't fit */
+}
+
+/* --- Information Panel --- */
+.info-box {
+    background-color: #F9FAFB;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    flex-grow: 1;
+}
+
+.info-box h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- New styles for description box --- */
+.algo-description-box {
+    background-color: #F9FAFB;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.4;
+    margin-top: 1rem;
+}
+
+/* --- New styles for Counting Sort --- */
+#counting-array-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #F9FAFB;
+    margin-bottom: 1rem;
+    min-height: 50px;
+}
+
+.count-cell {
+    width: 30px;
+    height: 40px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+}
+.count-cell .count-index {
+    font-weight: 600;
+    font-size: 0.7rem;
+    color: var(--text-light);
+}
+.count-cell .count-value {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+}
+
+/* --- New Styles for Stack/Queue Visualization --- */
+#stack-queue-container {
+    display: flex;
+    flex-direction: column-reverse; /* To make items stack from bottom up */
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    width: 150px; /* Fixed width for the stack */
+    height: 100%;
+    padding-bottom: 1rem;
+    border: 2px solid var(--border-color);
+    border-top: none; /* Open top */
+    border-radius: 0 0 8px 8px;
+    position: relative;
+}
+
+.stack-item {
+    width: 100px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animation classes */
+.stack-item.push-animation {
+    animation: push 0.4s ease-out;
+}
+.stack-item.pop-animation {
+    animation: pop 0.4s ease-in forwards;
+}
+
+@keyframes push {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pop {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+/* --- Enhancements for Stack/Queue --- */
+#stack-top-pointer {
+    position: absolute;
+    left: -70px; /* Position to the left of the stack */
+    font-weight: 600;
+    color: var(--primary-color);
+    transition: top 0.3s ease-in-out;
+    opacity: 0; /* Hidden by default */
+}
+
+#stack-top-pointer.visible {
+    opacity: 1;
+}
+
+.stack-item.peek-animation {
+    animation: peek 0.6s ease-in-out;
+}
+
+#stack-queue-container.error {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes peek {
+    0%, 100% { transform: scale(1); background-color: var(--primary-color); }
+    50% { transform: scale(1.1); background-color: #F59E0B; } /* Yellow glow */
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+#pseudocode {
+    background-color: var(--panel-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    font-size: 0.85rem;
+}
+
+.hidden {
+    display: none !important;
+}
+/* --- Responsive Design using Media Queries --- */
+
+/* For Tablets and Smaller Desktops */
+@media (max-width: 1200px) {
+    #app-container {
+        /* Make side panels a little smaller */
+        grid-template-columns: 240px 1fr 280px;
+        padding: 1rem;
+        gap: 1rem;
+    }
+}
+
+/* For Mobile Phones and very small screens */
+@media (max-width: 992px) {
+    /* --- Main Layout Changes --- */
+    #app-container {
+        /* Switch to a single column layout */
+        grid-template-columns: 1fr;
+        /* Allow panels to have their own height */
+        grid-template-rows: auto; 
+    }
+
+    /* --- ADD THIS NEW RULE --- */
+    #visualization-panel {
+        /* Give it a minimum height so it doesn't collapse */
+        min-height: 40vh; /* 40% of the viewport height */
+    }
+    /* --- END OF NEW RULE --- */
+
+    .panel {
+        padding: 1rem;
+    }
+
+    /* --- Header Navigation Changes --- */
+    .main-nav {
+        flex-wrap: wrap; /* Allow items to wrap to the next line */
+        height: auto;
+        padding: 0.5rem 0;
+    }
+    
+    .nav-links {
+        /* Make the nav links take the full width below the logo */
+        order: 3; /* Change the order so it appears last */
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+        gap: 1rem;
+    }
+
+    .user-actions {
+        /* Move login/signup to be next to the logo */
+        order: 2;
+    }
+
+    /* Make the visualization area for stacks/queues smaller on mobile */
+    #stack-queue-container {
+        width: 120px;
+    }
+    .stack-item {
+        width: 80px;
+        height: 35px;
+    }
+}
