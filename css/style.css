@@ -552,3 +552,100 @@ select {
 .queue-cell.filled .cell-value {
     color: white;
 }
+
+/* --- Styles for All Linked List Visualizations --- */
+#linked-list-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    flex-wrap: wrap;
+    gap: 10px 0;
+    width: 100%;
+    padding: 2rem 0; /* Add padding for pointers */
+}
+
+.ll-node-container {
+    display: flex;
+    flex-direction: column; /* Stack node and prev pointer */
+    align-items: center;
+    position: relative;
+}
+
+.ll-node-main {
+    display: flex;
+    align-items: center;
+}
+
+.ll-node {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid var(--primary-hover);
+    position: relative;
+    z-index: 2;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* --- Pointer Styles --- */
+.ll-pointer-next, .ll-pointer-prev {
+    height: 4px;
+    background-color: var(--text-light);
+    position: relative;
+    z-index: 1;
+}
+.ll-pointer-next { width: 50px; }
+.ll-pointer-prev { width: 50px; margin-bottom: 5px; } /* For doubly list */
+
+/* Arrowheads */
+.ll-pointer-next::after {
+    content: ''; position: absolute; right: -2px; top: -6px;
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 10px solid var(--text-light);
+}
+.ll-pointer-prev::before {
+    content: ''; position: absolute; left: -2px; top: -6px;
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 10px solid var(--text-light);
+}
+
+/* Hide unnecessary pointers */
+.ll-node-container:last-child .ll-pointer-next { display: none; }
+.ll-node-container.singly .ll-pointer-prev, .ll-node-container.circular-singly .ll-pointer-prev { display: none; }
+
+/* Index and Head/Tail Labels */
+.ll-node-container .ll-index {
+    position: absolute; top: -25px; font-size: 0.8rem; color: var(--text-light);
+}
+.ll-head-pointer, .ll-tail-pointer {
+    position: absolute;
+    font-weight: 600;
+    color: var(--primary-color);
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    white-space: nowrap;
+    /* We have removed the initial top/bottom positioning */
+}
+
+.ll-head-pointer.visible, .ll-tail-pointer.visible { opacity: 1; }
+
+/* SVG for Circular Pointers */
+#ll-circular-svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none; /* Allows clicking through the SVG */
+}
+#ll-circular-svg path {
+    stroke: var(--text-light);
+    stroke-width: 3;
+    fill: none;
+    marker-end: url(#arrowhead);
+}
