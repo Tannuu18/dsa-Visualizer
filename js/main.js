@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'sorting': setupSortingPage,
         'searching': setupSearchingPage,
         'stack': setupStackPage,
+        'queue': setupQueuePage,
         // Add other pages here later
-        // 'queue': setupQueuePage,
+        // 'linkedlist': setupLinkedListPage,
     };
 
     function showPage(pageId) {
@@ -44,4 +45,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show the default page (sorting) on initial load
     showPage('sorting');
 });
-
