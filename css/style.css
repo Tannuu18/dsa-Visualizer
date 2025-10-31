@@ -649,3 +649,107 @@ select {
     fill: none;
     marker-end: url(#arrowhead);
 }
+/* --- New Styles for Binary Search Tree --- */
+#bst-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Allow scrolling if tree is large */
+}
+
+.bst-node {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid var(--primary-hover);
+    z-index: 2;
+    /* Use CSS variables for positioning, set by JS */
+    left: var(--left-pos);
+    top: var(--top-pos);
+    transition: all 0.4s ease-in-out;
+}
+
+#bst-svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 500px; /* Ensure SVG is wide enough */
+    min-height: 500px; /* Ensure SVG is tall enough */
+    z-index: 1;
+    pointer-events: none;
+}
+
+#bst-svg-container line {
+    stroke: var(--text-light);
+    stroke-width: 3;
+    transition: all 0.4s ease-in-out;
+}
+
+/* --- New Styles for Graph Visualization --- */
+#graph-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevent scrollbars inside the panel */
+    cursor: crosshair;
+}
+
+.graph-node {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid var(--primary-hover);
+    z-index: 10;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.graph-node:hover {
+    transform: scale(1.1);
+}
+
+.graph-node.selected {
+    border-color: #F59E0B; /* Yellow border for selection */
+}
+
+#graph-svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none; /* Allows clicks to go through to the container */
+}
+
+#graph-svg-container line {
+    stroke: var(--text-light);
+    stroke-width: 3;
+}
+
+#graph-svg-container text {
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    font-weight: 600;
+    fill: var(--primary-color);
+    text-anchor: middle; /* Center the text */
+    pointer-events: none;
+}
