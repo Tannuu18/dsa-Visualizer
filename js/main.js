@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'queue': setupQueuePage,
         'linkedlist': setupLinkedListPage,
         'bst': setupBstPage,
-        // Add other pages here later
-        // 'graph': setupGraphPage,
+        'graph': setupGraphPage,
     };
 
     function showPage(pageId) {

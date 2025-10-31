@@ -753,3 +753,20 @@ select {
     text-anchor: middle; /* Center the text */
     pointer-events: none;
 }
+
+/* --- Styles for Dijkstra's Algorithm --- */
+.node-distance {
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #DC2626; /* Red color for emphasis */
+    background-color: white;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
+#graph-svg-container line.path {
+    stroke: #F59E0B; /* Yellow for the final path */
+    stroke-width: 4;
+}
