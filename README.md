@@ -6,7 +6,7 @@ Whether you're a student preparing for an exam or a developer brushing up on cor
 
 ## 🚀 Live Demo
 
-[**Click here to interact with the live project!**](https://Tannu18.github.io/dsa-Visualizer/)
+[**Click here to interact with the live project!**](https://Tannuu18.github.io/dsa-Visualizer/)
 
 > **Note:** As a newly deployed site on a free domain, you may initially see a browser safety warning. This is a common false positive. The site is static HTML/CSS/JS and 100% safe. You can safely proceed by clicking "Details" -> "visit this unsafe site" or report the false positive to Google.
 
@@ -92,4 +92,5 @@ This project has no complex dependencies. To run it locally:
     cd dsa-Visualizer
     ```
 3.  Open the `index.html` file in your favorite browser.
+
 
