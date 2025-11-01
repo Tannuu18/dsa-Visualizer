@@ -162,8 +162,8 @@ function setupGraphPage() {
             }
             const weightInput = document.getElementById('edge-weight');
             const weight = parseInt(weightInput.value);
-            if(isNaN(weight)) {
-                animationStepsP.innerText = "Please enter a valid edge weight.";
+            if(isNaN(weight) || weight <= 0) {
+                animationStepsP.innerText = "Please enter a valid, positive edge weight.";
                 return;
             }
             adj[selectedNode].push({ neighbor: clickedNodeId, weight: weight });
@@ -206,7 +206,8 @@ function setupGraphPage() {
                     const v = edge.neighbor;
                     if (!visited.has(String(v))) {
                         visited.add(String(v));
-                        document.getElementById(`edge-${u}-${v}`)?.setAttribute('stroke', '#F59E0B');
+                        // --- CHANGED --- Use light blue for explored
+                        document.getElementById(`edge-${u}-${v}`)?.setAttribute('stroke', '#3B82F6');
                         await sleep(300);
                         queue.push(v);
                     }
@@ -224,7 +225,8 @@ function setupGraphPage() {
                     const neighbors = adj[u].map(e => e.neighbor).reverse();
                     for (const v of neighbors) {
                         if (!visited.has(String(v))) {
-                            document.getElementById(`edge-${u}-${v}`)?.setAttribute('stroke', '#F59E0B');
+                            // --- CHANGED --- Use light blue for explored
+                            document.getElementById(`edge-${u}-${v}`)?.setAttribute('stroke', '#3B82F6');
                             await sleep(300);
                             stack.push(v);
                         }
@@ -261,31 +263,23 @@ function setupGraphPage() {
 
         while (pq.size > 0) {
             let u = null;
-            // Get node with smallest distance
             for (const nodeId of pq) {
                 if (u === null || distances[nodeId] < distances[u]) {
                     u = nodeId;
                 }
             }
-
             if (u === null || distances[u] === Infinity) break;
-
             pq.delete(u);
-            nodes[u].element.style.backgroundColor = '#3B82F6'; // Visited color
-
-            // Update distance on UI
+            nodes[u].element.style.backgroundColor = '#3B82F6';
             const distEl = document.createElement('div');
             distEl.className = 'node-distance';
             distEl.textContent = distances[u];
             nodes[u].element.appendChild(distEl);
-
             if (u == endNodeId) {
                 animationStepsP.innerText = `Reached destination! Shortest distance: ${distances[u]}.`;
                 break;
             }
-            
             await sleep(500);
-
             for (const edge of adj[u]) {
                 const v = edge.neighbor;
                 if (pq.has(String(v))) {
@@ -293,26 +287,30 @@ function setupGraphPage() {
                     if (alt < distances[v]) {
                         distances[v] = alt;
                         prev[v] = u;
-                        document.getElementById(`edge-${u}-${v}`)?.setAttribute('stroke', '#F59E0B');
+                        // --- CHANGED --- Use light blue for explored edges
+                        document.getElementById(`edge-${u}-${v}`)?.setAttribute('stroke', '#3B82F6');
                         animationStepsP.innerText = `Found shorter path to ${v}. New distance: ${alt}`;
                         await sleep(400);
                     }
                 }
             }
         }
-
-        // Reconstruct and highlight the path
         let path = [];
         let current = String(endNodeId);
         while (current !== null) {
             path.unshift(current);
             current = prev[current];
         }
-
         if (path[0] == startNodeId) {
             for (let i = 0; i < path.length - 1; i++) {
                 const u = path[i];
                 const v = path[i + 1];
+                
+                // --- NEW --- Remove inline style so class can apply
+                document.getElementById(`edge-${u}-${v}`)?.removeAttribute('stroke');
+                document.getElementById(`edge-${v}-${u}`)?.removeAttribute('stroke');
+
+                // --- NEW --- Add class to highlight final path
                 document.getElementById(`edge-${u}-${v}`)?.classList.add('path');
                 document.getElementById(`edge-${v}-${u}`)?.classList.add('path');
                 nodes[v].element.style.backgroundColor = '#F59E0B';
@@ -321,25 +319,29 @@ function setupGraphPage() {
         } else {
              animationStepsP.innerText += ` No path found from ${startNodeId} to ${endNodeId}.`;
         }
-        
         enableControls();
     }
     
     function handleReset(fullReset = true) {
         isAnimating = false;
+        
+        clearDistances();
+        drawEdges(); // Redraw edges to clear highlights
+        for(const nodeId in nodes) {
+            nodes[nodeId].element.style.backgroundColor = '';
+            nodes[nodeId].element.classList.remove('selected');
+        }
+
         if (fullReset) {
             nodeCounter = 0;
-            nodes = {}; adj = {}; selectedNode = null;
-            graphContainer.innerHTML = '<svg id="graph-svg-container"><defs><marker id="arrowhead" markerWidth="5" markerHeight="3.5" refX="5" refY="1.75" orient="auto"><polygon points="0 0, 5 1.75, 0 3.5" /></marker></defs></svg>';
+            nodes = {};
+            adj = {};
+            selectedNode = null;
+            document.querySelectorAll('.graph-node').forEach(node => node.remove());
             updateAdjacencyList();
             animationStepsP.innerText = "Graph has been reset.";
-        } else { // Soft reset for clearing colors/distances
-            clearDistances();
-            drawEdges();
-            for(const nodeId in nodes) {
-                nodes[nodeId].element.style.backgroundColor = '';
-            }
         }
+        enableControls();
     }
 
     // --- EVENT LISTENERS ---
