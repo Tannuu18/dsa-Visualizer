@@ -4,8 +4,10 @@ Welcome to **DSA Visualizer**! Learning complex data structures and algorithms f
 
 Whether you're a student preparing for an exam or a developer brushing up on core computer science fundamentals, this tool is designed to make learning intuitive and engaging.
 
-## 🚀 Live Demo
-[**Click here to interact with the live project!(GITHUB PAGES)**](https://dsa-visualizer18.netlify.app/)
+## 🚀 Live Demo(NETLIFY)
+[**Click here to interact with the live project!(NETLIFY)**](https://dsa-visualizer18.netlify.app/)
+
+## 🚀 Live Demo(GITHUB PAGES)
 [**Click here to interact with the live project!(GITHUB PAGES)**](https://Tannuu18.github.io/dsa-Visualizer/)
 
 
@@ -77,6 +79,7 @@ Building this project from scratch was a deep dive into both data structures and
 * **Asynchronous JavaScript:** Mastering `async/await` with a `sleep()` function to create clean, easy-to-read, step-by-step animations that don't block the browser.
 
 ---
+
 
 
 
