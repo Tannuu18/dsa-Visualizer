@@ -8,7 +8,6 @@ Whether you're a student preparing for an exam or a developer brushing up on cor
 
 [**Click here to interact with the live project!**](https://Tannuu18.github.io/dsa-Visualizer/)
 
-> **Note:** As a newly deployed site on a free domain, you may initially see a browser safety warning. This is a common false positive. The site is static HTML/CSS/JS and 100% safe. You can safely proceed by clicking "Details" -> "visit this unsafe site" or report the false positive to Google.
 
 ---
 
@@ -79,18 +78,7 @@ Building this project from scratch was a deep dive into both data structures and
 
 ---
 
-## 🏁 Running Locally
 
-This project has no complex dependencies. To run it locally:
 
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/Tannu18/dsa-Visualizer.git](https://github.com/Tannu18/dsa-Visualizer.git)
-    ```
-2.  Navigate to the project directory:
-    ```bash
-    cd dsa-Visualizer
-    ```
-3.  Open the `index.html` file in your favorite browser.
 
 
